@@ -1,14 +1,21 @@
 package com.curso.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -18,6 +25,10 @@ public class User implements Serializable {
 	private String nome;
 	private String email;
 	private Integer idade;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "client")
+	private List<Order> ordes = new ArrayList<>();
 	
 	public User() {}
 
@@ -60,6 +71,11 @@ public class User implements Serializable {
 	public void setIdade(Integer idade) {
 		this.idade = idade;
 	}
+	
+	public List<Order> getOrdes() {
+		return ordes;
+	}
+	
 
 	@Override
 	public int hashCode() {
@@ -77,7 +93,5 @@ public class User implements Serializable {
 		User other = (User) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
 
 }
