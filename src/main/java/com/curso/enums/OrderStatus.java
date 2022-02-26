@@ -2,19 +2,25 @@ package com.curso.enums;
 
 public enum OrderStatus {
 	
-	WAITING(1),
-	PEDDING(2),
-	SHIPPED(3),
-	CANCELLED(4);
+	WAITING(1, "Aguardando"),
+	PEDDING(2, "Pendente"),
+	SHIPPED(3, "Enviado"),
+	CANCELLED(4, "Cancelado");
 	
 	private int code;
+	private String descriptions;
 	
-	private OrderStatus(int code) {
+	private OrderStatus(int code, String descriptions) {
 		this.code = code;
+		this.descriptions = descriptions;
 	}
 	
 	public int getCode() {
 		return code;
+	}
+	
+	public String getDescriptions() {
+		return descriptions;
 	}
 	
 	public static OrderStatus valueOf(int code) {
